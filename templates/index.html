@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Face and Eye Detection</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url('/static/imageeee.png') center/cover no-repeat;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+   #videoContainer {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
+    #videoElement {
+      max-width: 65%;
+      border: 5px solid #2a3541;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    button {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 30px auto;
+      padding: 20px 20px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #fff;
+      background-color: #2a3541;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2a3541;
+    }
+    #togle {
+      text-align: center;
+      position: absolute;
+      top: 80%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+  <div id="togle">
+    <form action="/" method="POST">
+      <label for="name">Enter your name:</label>
+      <br>
+      <input type="text" id="name" name="name" required>
+      <br>
+      <button onclick="toggleVideoFeed()">Submit</button>
+    </form>
+  </div>
+  <div id="videoContainer"></div>
+
+  <script>
+    var videoPlaying = false;
+    var videoContainer = document.getElementById('videoContainer');
+    var videoElement;
+
+    function toggleVideoFeed() {
+      if (videoPlaying) {
+        stopVideoFeed();
+      } else {
+        startVideoFeed();
+      }
+    }
+
+    function startVideoFeed() {
+      videoElement = document.createElement('img');
+      videoElement.id = 'videoElement';
+      videoElement.src = '/video_feed';
+      videoContainer.appendChild(videoElement);
+      videoPlaying = true;
+    }
+
+    function stopVideoFeed() {
+      if (videoElement) {
+        videoContainer.removeChild(videoElement);
+        videoElement = null;
+        videoPlaying = false;
+      }
+    }
+  </script>
+
+</body>
+</html>
